@@ -1,0 +1,8 @@
+{
+    "https://www.pathofexile.com/*": {
+        "target": "https://www.pathofexile.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

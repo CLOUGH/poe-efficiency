@@ -1,0 +1,48 @@
+<div class="container pt-3">
+  <ng-container *ngIf="error; else elseTemplate">
+
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"></h4>
+      <p>A error has occured</p>
+      <p class="mb-0">
+        {{error.message}}
+      </p>
+    </div>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+    <ngb-tabset [activeId]="activeCharacter">
+      <ngb-tab [title]="character.name" *ngFor="let character of characters" [id]="character.name">
+        <ng-template ngbTabContent>
+
+          <table class="table table-striped uk-table-condensed mt-5">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Location</th>
+                <th scope="col">Identified</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <th scope="row"></th>
+                <td>
+                  <img [src]="item.icon" class="mr-2" style="width: 50px">
+                  {{ item.typeLine }} {{ item.name}}
+                </td>
+                <td>{{ item.ilvl | number}}</td>
+                <td>{{ item.inventoryId }}</td>
+                <td>{{ item.identified }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+  </ng-template>
+
+</div>
