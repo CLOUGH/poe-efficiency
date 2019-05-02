@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICharacter } from '../models/icharacter';
+import { map,  } from 'rxjs/operators';
+
 
 @Injectable()
 export class PathOfExileApiService {
@@ -36,6 +38,8 @@ export class PathOfExileApiService {
         params: httpParams,
         headers: this.getHeaders()
       }
-    );
+    ).pipe(
+      map((response: any) => response.json())
+    )
   }
 }

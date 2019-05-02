@@ -7,6 +7,7 @@ import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 import { ECharacterActions, GetCharacters, GetCharactersSuccess } from '../actions/character.actions';
 import { PathOfExileApiService } from '../../services/path-of-exile-api.service';
 import { IAppState } from '../state/app.state';
+import { ICharacter } from '../../models/icharacter';
 
 @Injectable()
 export class CharacterEffect {
@@ -20,10 +21,7 @@ export class CharacterEffect {
     @Effect()
     getCharacters$ = this._actions$.pipe(
         ofType<GetCharacters>(ECharacterActions.GetCharacters),
-        map(action => this.),
-        switchMap(([id, users]) => {
-            const selectUser = users.filter(user => user.id === +id)[0];
-            return of(new GetCharactersSuccess())
-        })
-    )
+        switchMap(() => this._poeService.getCharacters()),
+        switchMap((characters: ICharacter[]) => of(new GetCharactersSuccess(characters)))
+    );
 }
