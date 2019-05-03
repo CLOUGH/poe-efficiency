@@ -1,12 +1,12 @@
 import { ICharacter } from '../../models/icharacter';
 
 export interface ICharacterState {
-    activeCharacter: ICharacter;
+    selectedCharacterIndex: number;
     characters: ICharacter[];
 }
 
 
 export const initialCharacterState: ICharacterState = {
-    activeCharacter: null,
+    selectedCharacterIndex: null,
     characters: null
 }

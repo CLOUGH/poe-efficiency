@@ -25,10 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AngularFontAwesomeModule,
     NgbModule,
     CoreModule,
-    HomeModule,
     AppRoutingModule,
-
-
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,13 @@ import { PathOfExileApiService } from './services/path-of-exile-api.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsModalComponent } from './components/settings-modal/settings-modal.component';
 import { FormsModule } from '@angular/forms';
+import { StoreRouterConnectingModule  } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from 'src/environments/environment';
+import { appReducers } from './store/app/app.reducer';
+import { CharacterEffect } from './store/character/character.effect';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [HeaderComponent, SettingsModalComponent],
@@ -13,7 +20,21 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([
+      CharacterEffect
+    ]),
+    StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
+    !environment.production ? StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+      features: {
+        pause: false,
+        lock: true,
+        persist: true
+      }
+    }) : [],
   ],
   providers: [PathOfExileApiService],
   exports: [HeaderComponent],

@@ -1,12 +1,22 @@
-<div class="container-fluid">
-  <div class="row justify-content-md-center">
-    <h1 class="display-4 col col-md-auto offset-sm-2">POE Efficiency</h1>
-    
-    <div class="col col-sm-2 text-right align-self-center">
-
-      <i class="fa fa-cog" aria-hidden="true" (click)="openSettings()"></i>
+<div class="container">
+  <div class="d-flex justify-content-between bd-highlight mb-3">
+    <div class="p-2 bd-highlight"></div>
+    <div class="p-2 bd-highligh">
+      <h1 class="display-4 text-center">Path Of Efficiency</h1>
     </div>
-    
+    <div class="p-2 bd-highlight">
+      <div class="text-right">
+        <i class="fa fa-cog" aria-hidden="true" (click)="openSettings()"></i>
+      </div>
+
+      <div class="form-group">
+        <!-- <label for=""></label> -->
+        <select class="form-control form-control-sm" name="selectedCharacter" id="selectedCharacter" (change)="onChangeSelectedCharacter($event.target.value)">
+          <option *ngFor="let character of characters$|async; let i=index"
+            [selected]="(selectedCharacterIndex$|async)===i" [value]="i" >{{character.name}}</option>
+        </select>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -20,6 +30,9 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/market" routerLinkActive="active">Market</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>

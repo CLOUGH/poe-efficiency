@@ -1,15 +1,16 @@
-import { initialCharacterState, ICharacterState } from '../state/character.state';
-import { CharacterActions, ECharacterActions } from '../actions/character.actions';
+import { initialCharacterState, ICharacterState } from './character.state';
+import { CharacterActions, ECharacterActions } from './character.actions';
+
 
 export const characterReducers = (
     state = initialCharacterState,
     action: CharacterActions
 ): ICharacterState => {
     switch(action.type) {
-        case ECharacterActions.ChangeActiveCharacter : {
+        case ECharacterActions.SetSelectedCharacterIndex : {
             return {
                 ...state,
-                activeCharacter : action.payload
+                selectedCharacterIndex : action.payload
             }
         }
         case ECharacterActions.GetCharactersSuccess : {

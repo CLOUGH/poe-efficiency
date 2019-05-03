@@ -11,8 +11,8 @@
 
   </ng-container>
   <ng-template #elseTemplate>
-    <ngb-tabset [activeId]="activeCharacter">
-      <ngb-tab [title]="character.name" *ngFor="let character of characters" [id]="character.name">
+    <ngb-tabset>
+      <ngb-tab title="Character">
         <ng-template ngbTabContent>
 
           <table class="table table-striped uk-table-condensed mt-5">
@@ -23,6 +23,7 @@
                 <th scope="col">Level</th>
                 <th scope="col">Location</th>
                 <th scope="col">Identified</th>
+                <th scope="col">Value</th>
               </tr>
             </thead>
             <tbody>
@@ -40,6 +41,9 @@
           </table>
 
         </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Stash">
+
       </ngb-tab>
     </ngb-tabset>
 

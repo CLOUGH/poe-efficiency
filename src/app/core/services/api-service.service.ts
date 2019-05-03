@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICharacter } from '../models/icharacter';
-import { map,  } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 
-
-@Injectable()
-export class PathOfExileApiService {
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiServiceService {
   baseUrl = 'http://localhost:3000';
 
+  
   constructor(private http: HttpClient) { }
 
   private getHeaders() {
@@ -39,5 +40,14 @@ export class PathOfExileApiService {
         headers: this.getHeaders()
       }
     )
+  }
+
+  getItemValue(item){
+    return this.http.post(`${this.baseUrl}/get-item-value`,{
+      data: {
+        item
+      },
+      headers: this.getHeaders()
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { ICharacterState, initialCharacterState } from './character.state';
+import { ICharacterState, initialCharacterState } from '../character/character.state';
 
 export interface IAppState {
     character: ICharacterState;
