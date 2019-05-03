@@ -36,6 +36,11 @@
                 <td>{{ item.ilvl | number}}</td>
                 <td>{{ item.inventoryId }}</td>
                 <td>{{ item.identified }}</td>
+                <td>
+                  <button type="button" name="sync" (click)="getItemValue(item)" class="btn btn-primary btn-sm">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

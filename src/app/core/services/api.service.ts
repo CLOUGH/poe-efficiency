@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICharacter } from '../models/icharacter';
-import { HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiServiceService {
+export class ApiService {
   baseUrl = 'http://localhost:3000';
 
   
@@ -43,11 +43,6 @@ export class ApiServiceService {
   }
 
   getItemValue(item){
-    return this.http.post(`${this.baseUrl}/get-item-value`,{
-      data: {
-        item
-      },
-      headers: this.getHeaders()
-    });
+    return this.http.post(`${this.baseUrl}/get-item-value`,item, {headers: this.getHeaders()});
   }
 }

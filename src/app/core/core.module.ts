@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { appReducers } from './store/app/app.reducer';
 import { CharacterEffect } from './store/character/character.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [HeaderComponent, SettingsModalComponent],
@@ -36,7 +37,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       }
     }) : [],
   ],
-  providers: [PathOfExileApiService],
+  providers: [PathOfExileApiService, ApiService],
   exports: [HeaderComponent],
   entryComponents: [SettingsModalComponent]
 })

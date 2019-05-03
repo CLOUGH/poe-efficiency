@@ -7,12 +7,13 @@ import { selectSelectedCharacter } from 'src/app/core/store/character/character.
 import { ICharacter } from 'src/app/core/models/icharacter';
 import { filter, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
-  providers: [PathOfExileApiService]
+  providers: [PathOfExileApiService, ApiService]
 })
 export class HomeComponent implements OnInit {
   characters: any[];
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private poeService: PathOfExileApiService,
     private toastr: ToastrService,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
@@ -58,6 +60,12 @@ export class HomeComponent implements OnInit {
       console.log(data);
       this.items = data.items;
     });
+  }
+
+  private getItemValue(item) {
+    this.apiService.getItemValue(item).subscribe(data=>{
+      console.log(data)
+    })
   }
 
 }
