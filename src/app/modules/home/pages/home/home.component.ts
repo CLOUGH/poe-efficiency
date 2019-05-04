@@ -36,35 +36,22 @@ export class HomeComponent implements OnInit {
         switchMap(character => of(character))
       )
       .subscribe(character => {
-        console.log(character);
+        // console.log(character);
 
         this.setItemData("cloughax", character.name);
       });
-    // this.poeService.getCharacters().subscribe((data: any[]) => {
-    //   this.characters = data;
-    //   this.activeCharacter = data.find(character => character.lastActive === true).name;
-
-    //   this.setItemData('cloughax', this.activeCharacter);
-
-    // }, (error: any) => {
-    //   setTimeout(() => {
-    //     this.toastr.error('A error has occured while trying to get character data.');
-    //   });
-    //   console.error(error);
-    //   this.error = error;
-    // });
   }
 
   private setItemData(accountName, character) {
     this.poeService.getItems(accountName, character).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.items = data.items;
     });
   }
 
   private getItemValue(item) {
     this.apiService.getItemValue(item).subscribe(data=>{
-      console.log(data)
+      // console.log(data)
     })
   }
 

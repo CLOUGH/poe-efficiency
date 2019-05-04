@@ -1,4 +1,54 @@
-<div [className]="(itemData.identified ? 'identified' : 'unidentified') +' item-container'" class="" *ngIf="itemData">
+<div [className]="(itemData.identified ? 'identified' : 'unidentified') +' item-container'" container="body"
+  [ngbPopover]="popContent" [popoverTitle]="popTitle"
+  popoverClass="item-preview-popover item-type-{{itemData.frameType}}" *ngIf="itemData">
   <span class="vertical-align-helper"></span>
   <img [src]="itemData.icon" [alt]="itemData.name">
+
+
+  <ng-template #popTitle>
+    <div>{{itemData.typeLine}}</div>
+    <div>{{itemData.name}}</div>
+
+  </ng-template>
+  <ng-template #popContent>
+    <div *ngIf="itemData.properties" class="properties">
+      <span *ngFor="let property of itemData.properties; let i=index" [innerHTML]="property | displayPropertyName"></span>
+    </div>
+    <!-- Utility mods -->
+    <div *ngIf="itemData.utilityMods" class="utilityMods">
+      <span *ngFor="let utilityMod of itemData.utilityMods;" [innerHTML]="utilityMod | displayPropertyName"></span>
+    </div>
+    <hr
+      *ngIf="(itemData.properties && itemData.properties.length>0)||(itemData.utilityMods && itemData.utilityMods.length>0)">
+
+    <div *ngIf="itemData.requirements" class="requirements">
+      <span *ngFor="let requirement of itemData.requirements; let i=index" [innerHTML]="requirement | displayPropertyName"> </span>
+      <hr *ngIf="itemData.requirements.length>0">
+    </div>
+    <div *ngIf="itemData.enchantMods" class="enchantMods">
+      <div *ngFor="let enchantMod of itemData.enchantMods; let i=index">
+        <span class="text-enchanted">{{enchantMod}}</span>
+      </div>
+      <hr *ngIf="itemData.enchantMods.length>0">
+    </div>
+
+    <div *ngIf="itemData.implicitMods" class="implicitMods">
+      <div *ngFor="let implicitMod of itemData.implicitMods; let i=index">
+        <span>{{implicitMod}}</span>
+      </div>
+      <hr *ngIf="itemData.implicitMods.length>0">
+    </div>
+
+
+    <div *ngIf="itemData.explicitMods" class="explicitMods">
+      <div *ngFor="let explicitMod of itemData.explicitMods; let i=index" class="explicitMod">
+        <span>{{explicitMod}}</span>
+      </div>
+      <hr *ngIf="itemData.explicitMods.length>0">
+    </div>
+    <div *ngIf="itemData.descrText">
+      {{itemData.descrText}}
+    </div>
+
+  </ng-template>
 </div>

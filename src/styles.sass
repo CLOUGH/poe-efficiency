@@ -5,6 +5,8 @@
 @import '~font-awesome/css/font-awesome.css'
 @import '~ngx-toastr/toastr-bs4-alert'
 
+$rareSepartor: url('https://www.pathofexile.com/image/item/popup/seperator-rare.png?1554764516207') center no-repeat
+
 .form-control
     border-radius: 0rem
 
@@ -17,10 +19,90 @@ body
    color: white
 
 .bg-dark
-    background: black !important
+    background: black
 
-.modal-dialog
+.popover, .modal-dialog
     color: #495057;
 
 .nav-tabs
     background: black !important
+
+$rareTextColor: #ff7;
+$gemTextColor: #1ba29b;
+$normalTextColor: #c8c8c8;
+$uniqueTextColor: #af6025;
+$magicTextColor: #88f;
+$currencyTextColor: #aa9e82;
+$enchantedTextColor: #b4b4ff;
+
+@function getItemHeaderBorders($type)
+    @return url("assets/images/header-#{$type}-left.png") top left no-repeat, url("assets/images/header-#{$type}-right.png") top right no-repeat, url("assets/images/header-#{$type}-middle.png");  
+
+@function getItemSepartor($type)
+    @return url("assets/images/seperator-#{$type}.png") center no-repeat;
+
+
+.item-preview-popover
+    max-width: 400px;
+    min-width: 264px
+    background: rgba(0,0,0,0.8);
+    margin: 0px 7px;
+    .popover-body
+        text-align: center
+        color: #7f7f7f;
+        hr
+            margin: 5px 0px;
+        .magic-text 
+            color: $magicTextColor
+        .normal-text
+            color: $normalTextColor
+        .text-enchanted
+            color: $enchantedTextColor
+    .popover-header
+        display:
+        text-align: center
+        background: rgba(0,0,0,0.8);
+        font-size: 16px;
+        line-height: 1.2;
+        border-bottom: none
+    .properties
+    .implicitMods,.explicitMods
+        color: $magicTextColor
+    .arrow
+        display: none
+    &.item-type-0
+        .popover-header
+            background: getItemHeaderBorders("normal")
+            color: $normalTextColor
+        hr
+            background: getItemSepartor("normal")
+    &.item-type-1
+        .popover-header
+            background: getItemHeaderBorders("magic")
+            color: $magicTextColor
+        hr
+            background: getItemSepartor("magic")
+    &.item-type-2
+        .popover-header
+            background: getItemHeaderBorders("double-rare")
+            color: $rareTextColor
+        hr
+            background: getItemSepartor("rare")
+    &.item-type-3
+        .popover-header
+            color: $uniqueTextColor
+            background: getItemHeaderBorders("double-unique")
+        hr
+            background: getItemSepartor("unique")
+    &.item-type-4
+        .popover-header
+            color: $gemTextColor
+            background: getItemHeaderBorders("gem")
+        hr
+            background: getItemSepartor("gem")
+    &.item-type-5
+        .popover-header
+            color: $currencyTextColor
+            background: getItemHeaderBorders("currency")
+        hr
+            background: getItemSepartor("currency")

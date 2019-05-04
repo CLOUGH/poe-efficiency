@@ -9,7 +9,7 @@ export class ItemComponent implements OnInit {
 
   public itemData: any;
 
-  @Input() set item(value: any){
+  @Input() set item(value: any) {
     this.itemData = value;
   }
 
