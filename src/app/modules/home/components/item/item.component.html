@@ -6,32 +6,46 @@
 
 
   <ng-template #popTitle>
-    <div>{{itemData.typeLine}}</div>
+    <div *ngIf="itemData.vaal">{{itemData.vaal.baseTypeName}}</div>
+    <div *ngIf="!itemData.vaal">{{itemData.typeLine}}</div>
     <div>{{itemData.name}}</div>
 
   </ng-template>
   <ng-template #popContent>
     <div *ngIf="itemData.properties" class="properties">
-      <span *ngFor="let property of itemData.properties; let i=index" [innerHTML]="property | displayPropertyName"></span>
+      <div *ngFor="let property of itemData.properties; let i=index">
+        <div [innerHTML]="property | displayPropertyName"></div>
+      </div>
     </div>
     <!-- Utility mods -->
     <div *ngIf="itemData.utilityMods" class="utilityMods">
-      <span *ngFor="let utilityMod of itemData.utilityMods;" [innerHTML]="utilityMod | displayPropertyName"></span>
+      <div *ngFor="let utilityMod of itemData.utilityMods">
+        <div [innerHTML]="utilityMod | displayPropertyName"></div>
+      </div>
     </div>
     <hr
       *ngIf="(itemData.properties && itemData.properties.length>0)||(itemData.utilityMods && itemData.utilityMods.length>0)">
 
+    <!-- Requirements -->
     <div *ngIf="itemData.requirements" class="requirements">
-      <span *ngFor="let requirement of itemData.requirements; let i=index" [innerHTML]="requirement | displayPropertyName"> </span>
+      <span *ngFor="let requirement of itemData.requirements; let i=index"> 
+        <span [innerHTML]="requirement | displayPropertyName"></span><span *ngIf="i<itemData.requirements.length-1">, </span>
+      </span>
       <hr *ngIf="itemData.requirements.length>0">
     </div>
+    <!-- secDescrText -->
+    <div *ngIf="itemData.secDescrText" class="secDescrText">
+      <span>{{itemData.secDescrText}}</span>
+      <hr *ngIf="itemData.requirements.length>0">
+    </div>
+    <!-- Enhancements -->
     <div *ngIf="itemData.enchantMods" class="enchantMods">
       <div *ngFor="let enchantMod of itemData.enchantMods; let i=index">
         <span class="text-enchanted">{{enchantMod}}</span>
       </div>
       <hr *ngIf="itemData.enchantMods.length>0">
     </div>
-
+    <!-- ImplicitMods -->
     <div *ngIf="itemData.implicitMods" class="implicitMods">
       <div *ngFor="let implicitMod of itemData.implicitMods; let i=index">
         <span>{{implicitMod}}</span>
@@ -39,16 +53,85 @@
       <hr *ngIf="itemData.implicitMods.length>0">
     </div>
 
-
+    <!-- Explicit Mods -->
     <div *ngIf="itemData.explicitMods" class="explicitMods">
       <div *ngFor="let explicitMod of itemData.explicitMods; let i=index" class="explicitMod">
         <span>{{explicitMod}}</span>
       </div>
+      
       <hr *ngIf="itemData.explicitMods.length>0">
+    </div>
+    
+
+
+    <!-- VAAL TYPE -->
+    <div *ngIf="itemData.vaal">
+      <!--  -->
+      <div>
+        <h5 class="vaal-name">{{itemData.typeLine}}</h5>
+        <hr>
+      </div>
+      <div *ngIf="itemData.vaal.properties" class="properties">
+          <div *ngFor="let property of itemData.vaal.properties; let i=index">
+            <div [innerHTML]="property | displayPropertyName"></div>
+          </div>
+        </div>
+        <!-- Utility mods -->
+        <div *ngIf="itemData.vaal.utilityMods" class="utilityMods">
+          <div *ngFor="let utilityMod of itemData.vaal.utilityMods">
+            <div [innerHTML]="utilityMod | displayPropertyName"></div>
+          </div>
+        </div>
+      <hr
+        *ngIf="(itemData.vaal.properties && itemData.vaal.properties.length>0)||(itemData.vaal.utilityMods && itemData.vaal.utilityMods.length>0)">
+  
+  
+      <!-- secDescrText -->
+      <div *ngIf="itemData.vaal.secDescrText" class="secDescrText">
+        <span>{{itemData.vaal.secDescrText}}</span>
+        <hr *ngIf="itemData.vaal.secDescrText.length>0">
+      </div>
+      <!-- Enhancements -->
+      <div *ngIf="itemData.vaal.enchantMods" class="enchantMods">
+        <div *ngFor="let enchantMod of itemData.vaal.enchantMods; let i=index">
+          <span class="text-enchanted">{{enchantMod}}</span>
+        </div>
+        <hr *ngIf="itemData.vaal.enchantMods.length>0">
+      </div>
+      <!-- ImplicitMods -->
+      <div *ngIf="itemData.vaal.implicitMods" class="implicitMods">
+        <div *ngFor="let implicitMod of itemData.vaal.implicitMods; let i=index">
+          <span>{{implicitMod}}</span>
+        </div>
+        <hr *ngIf="itemData.vaal.implicitMods.length>0">
+      </div>
+  
+      <!-- Explicit Mods -->
+      <div *ngIf="itemData.vaal.explicitMods" class="explicitMods">
+        <div *ngFor="let explicitMod of itemData.vaal.explicitMods; let i=index" class="explicitMod">
+          <span>{{explicitMod}}</span>
+        </div>
+        <hr *ngIf="itemData.vaal.explicitMods.length>0">
+      </div>
+    </div>
+    <div *ngIf="itemData.corrupted">
+      <span  class="text-corrupted">Corrupted</span> 
+      <hr *ngIf="itemData.vaal.explicitMods.length>0">
+    </div>
+    <div *ngIf="itemData.additionalProperties">
+      <div *ngFor="let additionalProperty of itemData.additionalProperties">
+        <div class="d-flex justify-content-center">
+          <span *ngIf="additionalProperty.type===20" class="experience-bar mr-2 pt-2">
+            <ngb-progressbar type="warning" [value]="additionalProperty.progress*100"></ngb-progressbar>
+          </span>
+          <span [innerHTML]="additionalProperty | displayPropertyName"></span>
+
+        </div>
+      </div>
+      <hr>
     </div>
     <div *ngIf="itemData.descrText">
       {{itemData.descrText}}
     </div>
-
   </ng-template>
 </div>

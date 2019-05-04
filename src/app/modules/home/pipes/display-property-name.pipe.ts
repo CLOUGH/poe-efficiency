@@ -15,14 +15,16 @@ export class DisplayPropertyNamePipe implements PipeTransform {
         return this.sanitizer.bypassSecurityTrustHtml(this.displayMode0(property));
       case 1:
         return this.sanitizer.bypassSecurityTrustHtml(this.displayMode1(property));
+      case 2:
+        return this.sanitizer.bypassSecurityTrustHtml(this.displayMode2(property));
       case 3:
         return this.sanitizer.bypassSecurityTrustHtml(this.displayMode3(property));
     }
     return property;
   }
 
-  getValue(value){
-    return value[1] === 1 ? `<span class="magic-text "><b>${value[0]}<b></span>` 
+  getValue(value) {
+    return value[1] === 1 ? `<span class="magic-text "><b>${value[0]}<b></span>`
       : `<span class="text-white"><b>${value[0]}</b></span>`
   }
 
@@ -32,8 +34,8 @@ export class DisplayPropertyNamePipe implements PipeTransform {
       const newValue = this.getValue(value);
       propertyName = `${propertyName} : ${newValue}`;
     });
-    
-    return `<div>${propertyName}</div>`;
+
+    return propertyName;
   }
   displayMode1(property: any) {
     let propertyName = "";
@@ -41,11 +43,21 @@ export class DisplayPropertyNamePipe implements PipeTransform {
       const newValue = this.getValue(value);
       propertyName = newValue;
     });
-    
+
     console.log(property);
     propertyName = `${propertyName} ${property.name}`
 
-    return `<span>${propertyName}, </span>`;
+    return propertyName;
+  }
+
+  displayMode2(property: any) {
+    let propertyName = "";
+    property.values.forEach(value => {
+      const newValue = this.getValue(value);
+      propertyName = newValue;
+    });
+
+    return propertyName;
   }
 
   displayMode3(property: any) {
@@ -55,7 +67,7 @@ export class DisplayPropertyNamePipe implements PipeTransform {
       propertyName = propertyName.replace(/(%\d)/, newValue);
     });
 
-    return `<div>${propertyName}</div>`;
+    return propertyName;
   }
 
 }
