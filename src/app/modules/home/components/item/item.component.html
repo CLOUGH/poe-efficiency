@@ -1,0 +1,4 @@
+<div [className]="(itemData.identified ? 'identified' : 'unidentified') +' item-container'" class="" *ngIf="itemData">
+  <span class="vertical-align-helper"></span>
+  <img [src]="itemData.icon" [alt]="itemData.name">
+</div>

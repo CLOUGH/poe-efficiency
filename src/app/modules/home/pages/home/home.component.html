@@ -1,4 +1,4 @@
-<div class="container pt-3">
+<div class="container-fluid pt-3">
   <ng-container *ngIf="error; else elseTemplate">
 
     <div class="alert alert-danger" role="alert">
@@ -14,37 +14,7 @@
     <ngb-tabset>
       <ngb-tab title="Character">
         <ng-template ngbTabContent>
-
-          <table class="table table-striped uk-table-condensed mt-5">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Level</th>
-                <th scope="col">Location</th>
-                <th scope="col">Identified</th>
-                <th scope="col">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of items">
-                <th scope="row"></th>
-                <td>
-                  <img [src]="item.icon" class="mr-2" style="width: 50px">
-                  {{ item.typeLine }} {{ item.name}}
-                </td>
-                <td>{{ item.ilvl | number}}</td>
-                <td>{{ item.inventoryId }}</td>
-                <td>{{ item.identified }}</td>
-                <td>
-                  <button type="button" name="sync" (click)="getItemValue(item)" class="btn btn-primary btn-sm">
-                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
+          <app-inventory [items]="items" *ngIf="items"></app-inventory>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Stash">

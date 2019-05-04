@@ -1,0 +1,50 @@
+<div class="inventory-container">
+  <div class="inventory-panel">
+    <div class="equipment">
+      <div class="slot weapon">
+        <app-item [item]="weapon"></app-item>
+      </div>
+      <div class="slot ring">
+        <app-item [item]="leftRing"></app-item>
+      </div>
+      <div class="slot head">
+        <app-item [item]="helm"></app-item>
+      </div>
+      <div class="body-armour slot">
+        <app-item [item]="bodyArmour"></app-item>
+      </div>
+      <div class="off-hand slot">
+        <app-item [item]="offHand"></app-item>
+      </div>
+      <div class="belt slot">
+        <app-item [item]="belt"></app-item>
+      </div>
+      <div class="right-ring slot">
+        <app-item [item]="rightRing "></app-item>
+      </div>
+      <div class="amulet slot">
+        <app-item [item]="amulet "></app-item>
+      </div>
+      <div class="boots slot">
+        <app-item [item]="boots"></app-item>
+      </div>
+      <div class="gloves slot">
+        <app-item [item]="gloves "></app-item>
+      </div>
+      <div [className]="'flask-'+flask.x+' slot'" *ngFor="let flask of flasks; let i=index">
+        <app-item [item]="flask"></app-item>
+      </div>
+
+    </div>
+
+    <div class="main-inventory">
+      <div class="items">
+        <div class="slot item" *ngFor="let item of inventoryItems; let i=index" [style.top]="(item.y*47.5)+'px'"
+          [style.left]="(item.x*47.5)+'px'">
+          <app-item [item]="item"></app-item>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
