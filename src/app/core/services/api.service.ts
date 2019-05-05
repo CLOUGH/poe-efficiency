@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ICharacter } from '../models/icharacter';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { switchMap, filter, map, find } from 'rxjs/operators';
+import { IStaticData } from '../store/static/istatic-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   baseUrl = 'http://localhost:3000';
-
+  pathOfExileUrl = 'https://www.pathofexile.com'
   
   constructor(private http: HttpClient) { }
 
@@ -42,7 +44,11 @@ export class ApiService {
     )
   }
 
-  getItemValue(item){
-    return this.http.post(`${this.baseUrl}/get-item-value`,item, {headers: this.getHeaders()});
+  getSimilarItem(item, leaguge){
+    return this.http.post(`${this.baseUrl}/get-similar-items?leauge=${leaguge}`, item, {headers: this.getHeaders()});
+  }
+
+  getStaticData(): Observable<IStaticData>{
+    return this.http.get<IStaticData>(`${this.baseUrl}/poe-static-data`, {headers: this.getHeaders()});
   }
 }

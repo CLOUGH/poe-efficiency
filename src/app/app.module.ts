@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentModule } from 'ngx-moment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       preventDuplicates: true,
     }),
     AngularFontAwesomeModule,
+    MomentModule,
     NgbModule,
     CoreModule,
     AppRoutingModule,

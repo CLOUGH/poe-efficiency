@@ -6,21 +6,21 @@ export const characterReducers = (
     state = initialCharacterState,
     action: CharacterActions
 ): ICharacterState => {
-    switch(action.type) {
-        case ECharacterActions.SetSelectedCharacterIndex : {
+    switch (action.type) {
+        case ECharacterActions.SetSelectedCharacterIndex: {
             return {
                 ...state,
-                selectedCharacterIndex : action.payload
-            }
+                selectedCharacterIndex: action.payload
+            };
         }
-        case ECharacterActions.GetCharactersSuccess : {
+        case ECharacterActions.GetCharactersSuccess: {
             return {
                 ...state,
                 characters: action.payload
-            }
+            };
         }
 
-        default: 
+        default:
             return state;
     }
 }

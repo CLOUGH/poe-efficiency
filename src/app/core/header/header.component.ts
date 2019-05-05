@@ -3,7 +3,7 @@ import { SettingsModalComponent } from '../components/settings-modal/settings-mo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAppState } from '../store/app/app.state';
 import { Store, select } from '@ngrx/store';
-import { GetCharacters, SetSelectedCharacterIndex } from '../store/character/character.actions';
+import { SetSelectedCharacterIndex } from '../store/character/character.actions';
 import { selectCharacterList, selectSelectedCharacterIndex } from '../store/character/character.selectors';
 
 @Component({
@@ -21,14 +21,14 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new GetCharacters());
+
   }
 
   openSettings() {
     const modalRef = this.modalService.open(SettingsModalComponent);
   }
 
-  onChangeSelectedCharacter(index: number){
+  onChangeSelectedCharacter(index: number) {
     this.store.dispatch(new SetSelectedCharacterIndex(index));
   }
 }

@@ -6,6 +6,8 @@ import { NgbTabsetModule, NgbPopoverModule, NgbProgressbarModule } from '@ng-boo
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ItemComponent } from './components/item/item.component';
 import { DisplayPropertyNamePipe } from './pipes/display-property-name.pipe';
+import { CurrencyPipe } from './pipes/currency.pipe';
+import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -13,13 +15,15 @@ import { DisplayPropertyNamePipe } from './pipes/display-property-name.pipe';
     HomeComponent,
     InventoryComponent,
     ItemComponent,
-    DisplayPropertyNamePipe],
+    DisplayPropertyNamePipe,
+    CurrencyPipe],
   imports: [
     CommonModule,
     HomeRoutingModule,
     NgbTabsetModule,
     NgbPopoverModule,
-    NgbProgressbarModule
+    NgbProgressbarModule,
+    MomentModule
   ]
 })
 export class HomeModule { }

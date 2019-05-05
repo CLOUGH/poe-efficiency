@@ -50,9 +50,9 @@ export class HomeComponent implements OnInit {
   }
 
   private getItemValue(item) {
-    this.apiService.getItemValue(item).subscribe(data=>{
-      // console.log(data)
-    })
+    // this.apiService.getItemValue(item).subscribe(data=>{
+    //   // console.log(data)
+    // })
   }
 
 }

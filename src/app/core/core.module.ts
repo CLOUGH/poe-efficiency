@@ -14,6 +14,7 @@ import { appReducers } from './store/app/app.reducer';
 import { CharacterEffect } from './store/character/character.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApiService } from './services/api.service';
+import { StaticDataEffect } from './store/static/static-data.effects';
 
 @NgModule({
   declarations: [HeaderComponent, SettingsModalComponent],
@@ -24,7 +25,8 @@ import { ApiService } from './services/api.service';
     FormsModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([
-      CharacterEffect
+      CharacterEffect,
+      StaticDataEffect
     ]),
     StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument({

@@ -1,5 +1,5 @@
 <div [className]="(itemData.identified ? 'identified' : 'unidentified') +' item-container'" container="body"
-  [ngbPopover]="popContent" [popoverTitle]="popTitle"
+  [ngbPopover]="popContent" [popoverTitle]="popTitle" (click)="getItemCurrentValue()"
   popoverClass="item-preview-popover item-type-{{itemData.frameType}}" *ngIf="itemData">
   <span class="vertical-align-helper"></span>
   <img [src]="itemData.icon" [alt]="itemData.name">
@@ -28,8 +28,9 @@
 
     <!-- Requirements -->
     <div *ngIf="itemData.requirements" class="requirements">
-      <span *ngFor="let requirement of itemData.requirements; let i=index"> 
-        <span [innerHTML]="requirement | displayPropertyName"></span><span *ngIf="i<itemData.requirements.length-1">, </span>
+      <span *ngFor="let requirement of itemData.requirements; let i=index">
+        <span [innerHTML]="requirement | displayPropertyName"></span><span *ngIf="i<itemData.requirements.length-1">,
+        </span>
       </span>
       <hr *ngIf="itemData.requirements.length>0">
     </div>
@@ -58,10 +59,10 @@
       <div *ngFor="let explicitMod of itemData.explicitMods; let i=index" class="explicitMod">
         <span>{{explicitMod}}</span>
       </div>
-      
+
       <hr *ngIf="itemData.explicitMods.length>0">
     </div>
-    
+
 
 
     <!-- VAAL TYPE -->
@@ -72,20 +73,20 @@
         <hr>
       </div>
       <div *ngIf="itemData.vaal.properties" class="properties">
-          <div *ngFor="let property of itemData.vaal.properties; let i=index">
-            <div [innerHTML]="property | displayPropertyName"></div>
-          </div>
+        <div *ngFor="let property of itemData.vaal.properties; let i=index">
+          <div [innerHTML]="property | displayPropertyName"></div>
         </div>
-        <!-- Utility mods -->
-        <div *ngIf="itemData.vaal.utilityMods" class="utilityMods">
-          <div *ngFor="let utilityMod of itemData.vaal.utilityMods">
-            <div [innerHTML]="utilityMod | displayPropertyName"></div>
-          </div>
+      </div>
+      <!-- Utility mods -->
+      <div *ngIf="itemData.vaal.utilityMods" class="utilityMods">
+        <div *ngFor="let utilityMod of itemData.vaal.utilityMods">
+          <div [innerHTML]="utilityMod | displayPropertyName"></div>
         </div>
+      </div>
       <hr
         *ngIf="(itemData.vaal.properties && itemData.vaal.properties.length>0)||(itemData.vaal.utilityMods && itemData.vaal.utilityMods.length>0)">
-  
-  
+
+
       <!-- secDescrText -->
       <div *ngIf="itemData.vaal.secDescrText" class="secDescrText">
         <span>{{itemData.vaal.secDescrText}}</span>
@@ -105,7 +106,7 @@
         </div>
         <hr *ngIf="itemData.vaal.implicitMods.length>0">
       </div>
-  
+
       <!-- Explicit Mods -->
       <div *ngIf="itemData.vaal.explicitMods" class="explicitMods">
         <div *ngFor="let explicitMod of itemData.vaal.explicitMods; let i=index" class="explicitMod">
@@ -115,8 +116,8 @@
       </div>
     </div>
     <div *ngIf="itemData.corrupted">
-      <span  class="text-corrupted">Corrupted</span> 
-      <hr *ngIf="itemData.vaal.explicitMods.length>0">
+      <span class="text-corrupted">Corrupted</span>
+      <hr>
     </div>
     <div *ngIf="itemData.additionalProperties">
       <div *ngFor="let additionalProperty of itemData.additionalProperties">
@@ -132,6 +133,15 @@
     </div>
     <div *ngIf="itemData.descrText">
       {{itemData.descrText}}
+    </div>
+    <div *ngIf="similarTradedItems">
+      <div *ngFor="let item of similarTradedItems.result| slice:0:5">
+        <span class="mr-1">{{  item.listing.indexed | amTimeAgo }}</span>
+        <span *ngIf="item.listing" class="color-white"><b>{{item.listing.price.amount}}x</b></span>
+        <span [innerHtml]= "item.listing.price.currency | currency | async"></span>
+
+      </div>
+      <a [href]="similarTradedItems.link" target="_blank" rel="noopener noreferrer">more</a>
     </div>
   </ng-template>
 </div>
