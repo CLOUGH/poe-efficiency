@@ -2,10 +2,10 @@ import { initialCharacterState, ICharacterState } from './character.state';
 import { CharacterActions, ECharacterActions } from './character.actions';
 
 
-export const characterReducers = (
+export function characterReducers (
     state = initialCharacterState,
     action: CharacterActions
-): ICharacterState => {
+): ICharacterState {
     switch (action.type) {
         case ECharacterActions.SetSelectedCharacterIndex: {
             return {

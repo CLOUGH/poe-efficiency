@@ -1,10 +1,10 @@
 import { StaticDataActions, EStaticDataActions } from './static-data.actions';
 import { IStaticDataState, initialStaticDataState } from './static-data.state';
 
-export const staticDataReducers = (
+export function staticDataReducers (
     state = initialStaticDataState,
     action: StaticDataActions
-): IStaticDataState => {
+): IStaticDataState  {
     switch (action.type) {
         case EStaticDataActions.GetStaticDataSucces: {
             return {
