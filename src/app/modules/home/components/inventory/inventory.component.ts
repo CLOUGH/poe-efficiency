@@ -95,5 +95,4 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

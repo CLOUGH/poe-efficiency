@@ -137,8 +137,10 @@
     <div *ngIf="similarTradedItems">
       <div *ngFor="let item of similarTradedItems.result| slice:0:5">
         <span class="mr-1">{{  item.listing.indexed | amTimeAgo }}</span>
-        <span *ngIf="item.listing" class="color-white"><b>{{item.listing.price.amount}}x</b></span>
-        <span [innerHtml]= "item.listing.price.currency | currency | async"></span>
+        <span *ngIf="item.listing.price">
+          <span *ngIf="item.listing.price" class="color-white"><b>{{item.listing.price.amount}}x</b></span>
+          <span [innerHtml]= "item.listing.price.currency | currency | async"></span>
+        </span>
 
       </div>
       <a [href]="similarTradedItems.link" target="_blank" rel="noopener noreferrer">more</a>

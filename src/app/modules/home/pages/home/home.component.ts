@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/core/store/app/app.state';
 import { selectSelectedCharacter } from 'src/app/core/store/character/character.selectors';
 import { ICharacter } from 'src/app/core/models/icharacter';
-import { filter, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { filter, switchMap, startWith, delay } from 'rxjs/operators';
+import { of, interval } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   items: any[];
   activeCharacter: string;
   error: any;
+  updating = false;
 
 
   constructor(
@@ -37,22 +38,34 @@ export class HomeComponent implements OnInit {
       )
       .subscribe(character => {
         // console.log(character);
-
-        this.setItemData("cloughax", character.name);
+        this.activeCharacter = character.name;
+        interval(30000).pipe(
+          startWith(0),
+          switchMap(() => {
+            this.updating = true;
+            return this.poeService.getItems('cloughax', character.name)
+          })
+        ).subscribe((data: any) => {
+          this.items = data.items;
+          setTimeout(() => {
+            this.updating = false;
+          }, 2000);
+        });
       });
   }
 
   private setItemData(accountName, character) {
-    this.poeService.getItems(accountName, character).subscribe((data: any) => {
-      // console.log(data);
-      this.items = data.items;
-    });
   }
 
-  private getItemValue(item) {
-    // this.apiService.getItemValue(item).subscribe(data=>{
-    //   // console.log(data)
-    // })
+
+  public refresh() {
+    this.updating = true;
+    this.poeService.getItems('cloughax', this.activeCharacter).subscribe((data: any) => {
+      this.items = data.items;
+      setTimeout(() => {
+        this.updating = false;
+      }, 2000);
+    });
   }
 
 }

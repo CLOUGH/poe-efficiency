@@ -8,6 +8,7 @@ import { ItemComponent } from './components/item/item.component';
 import { DisplayPropertyNamePipe } from './pipes/display-property-name.pipe';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { MomentModule } from 'ngx-moment';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MomentModule } from 'ngx-moment';
     NgbTabsetModule,
     NgbPopoverModule,
     NgbProgressbarModule,
-    MomentModule
+    MomentModule,
+    AngularFontAwesomeModule
   ]
 })
 export class HomeModule { }

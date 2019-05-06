@@ -10,18 +10,12 @@
     </div>
 
   </ng-container>
-  <ng-template #elseTemplate>
-    <ngb-tabset>
-      <ngb-tab title="Character">
-        <ng-template ngbTabContent>
-          <app-inventory [items]="items" *ngIf="items"></app-inventory>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Stash">
-
-      </ngb-tab>
-    </ngb-tabset>
-
-  </ng-template>
+  
+  <div class="options ">
+    <button type="button" name="" id="" class="btn btn-outline-primary float-left" (click)="refresh()" [disabled]="updating">
+      <i [className]="'fa fa-refresh fa-'+(updating?'spin':'')" aria-hidden="true" ></i>
+    </button>
+  </div>
+  <app-inventory [items]="items" *ngIf="items"></app-inventory>
 
 </div>
