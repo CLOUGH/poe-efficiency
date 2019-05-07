@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICharacter } from '../models/icharacter';
 import { map,  } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class PathOfExileApiService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
