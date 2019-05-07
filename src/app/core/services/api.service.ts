@@ -4,12 +4,13 @@ import { ICharacter } from '../models/icharacter';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { switchMap, filter, map, find } from 'rxjs/operators';
 import { IStaticData } from '../store/static/istatic-data';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = environment.apiUrl;
   pathOfExileUrl = 'https://www.pathofexile.com'
   
   constructor(private http: HttpClient) { }
