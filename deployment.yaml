@@ -43,7 +43,7 @@ kind: Ingress
 metadata:
   name: poe-frontend
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: website-ip
+    kubernetes.io/ingress.global-static-ip-name: poe-ip
   labels:
     app: poe-frontend
 spec:
