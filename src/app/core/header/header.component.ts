@@ -5,6 +5,8 @@ import { IAppState } from '../store/app/app.state';
 import { Store, select } from '@ngrx/store';
 import { SetSelectedCharacterIndex } from '../store/character/character.actions';
 import { selectCharacterList, selectSelectedCharacterIndex } from '../store/character/character.selectors';
+import { GoogleAnalyticsServiceService } from '../services/google-analytics-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private googleAnalyticsService: GoogleAnalyticsServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,10 +29,17 @@ export class HeaderComponent implements OnInit {
   }
 
   openSettings() {
+    this.googleAnalyticsService.eventEmitter('Configuration Event', 'opened settings modal', 'openSettings', null);
     const modalRef = this.modalService.open(SettingsModalComponent);
   }
 
   onChangeSelectedCharacter(index: number) {
+    this.googleAnalyticsService.eventEmitter(
+      'Configuration Event',
+      'changed active character',
+      'onChangeCharacter',
+      this.characters$[index].name
+    )
     this.store.dispatch(new SetSelectedCharacterIndex(index));
   }
 }

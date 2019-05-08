@@ -8,6 +8,7 @@ import { ICharacter } from 'src/app/core/models/icharacter';
 import { filter, switchMap, startWith, delay } from 'rxjs/operators';
 import { of, interval } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
+import { GoogleAnalyticsServiceService } from 'src/app/core/services/google-analytics-service.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
     private poeService: PathOfExileApiService,
     private toastr: ToastrService,
     private store: Store<IAppState>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private googleAnalyticsService: GoogleAnalyticsServiceService
   ) { }
 
   ngOnInit() {
@@ -59,6 +61,7 @@ export class HomeComponent implements OnInit {
 
 
   public refresh() {
+    this.googleAnalyticsService.eventEmitter('Character Items', 'Manually Triggered Refresh');
     this.updating = true;
     this.poeService.getItems('cloughax', this.activeCharacter).subscribe((data: any) => {
       this.items = data.items;
