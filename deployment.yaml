@@ -37,16 +37,3 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: poe-frontend
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: poe-ip
-  labels:
-    app: poe-frontend
-spec:
-  backend:
-    serviceName: poe-frontend
-    servicePort: 8080
