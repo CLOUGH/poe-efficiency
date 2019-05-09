@@ -11,6 +11,8 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentModule } from 'ngx-moment';
+import { environment } from 'src/environments/environment';
+import { AdsenseModule } from 'ng2-adsense';
 @NgModule({
   declarations: [
     AppComponent,

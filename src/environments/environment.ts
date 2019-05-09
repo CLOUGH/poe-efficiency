@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://localhost:8080',
+  adSenseId: 'ca-pub-6142432988038901'
 };
 
 /*

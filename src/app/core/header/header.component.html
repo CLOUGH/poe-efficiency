@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="d-flex justify-content-between bd-highlight mb-3">
     <div class="p-2 bd-highlight"></div>
     <div class="p-2 bd-highligh">
@@ -10,7 +10,6 @@
       </div>
 
       <div class="form-group">
-        <!-- <label for=""></label> -->
         <select class="form-control form-control-sm" name="selectedCharacter" id="selectedCharacter" (change)="onChangeSelectedCharacter($event.target.value)">
           <option *ngFor="let character of characters$|async; let i=index"
             [selected]="(selectedCharacterIndex$|async)===i" [value]="i" >{{character.name}}</option>
@@ -19,15 +18,15 @@
     </div>
   </div>
 
-</div>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <!-- <a class="navbar-brand" href="#">POE Efficiency</a> -->
+</div> -->
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <a class="navbar-brand" href="#">Path Of Efficiency</a>
   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
     aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavId">
-    <ul class="navbar-nav">
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
         <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
       </li>
@@ -36,6 +35,23 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mt-lg-0">
+      <li class="nav-item" ngbDropdown  >        
+        <a class="nav-link" ngbDropdownToggle  >
+          <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+          <span></span>
+          {{(selectedCharacter$|async)?.name}}
+        </a>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" > 
+          <button ngbDropdownItem *ngFor="let character of characters$|async; let i=index" (click)="changeSelectedCharacter(i)">{{character.name}}</button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="openSettings()">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
       </li>
     </ul>
   </div>

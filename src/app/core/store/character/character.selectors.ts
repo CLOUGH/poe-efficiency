@@ -19,5 +19,5 @@ export const selectSelectedCharacter = createSelector(
         selectCharacterList,
         selectSelectedCharacterIndex
     ],
-    (characters, index) =>  characters && index ? characters[index]: null
+    (characters, index) =>  characters && (index || index===0) ? characters[index]: null
 )

@@ -15,6 +15,7 @@ import { CharacterEffect } from './store/character/character.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApiService } from './services/api.service';
 import { StaticDataEffect } from './store/static/static-data.effects';
+import { AdsenseModule } from 'ng2-adsense';
 
 @NgModule({
   declarations: [HeaderComponent, SettingsModalComponent],
@@ -37,7 +38,7 @@ import { StaticDataEffect } from './store/static/static-data.effects';
         lock: true,
         persist: true
       }
-    }) : [],
+    }) : []
   ],
   providers: [PathOfExileApiService, ApiService],
   exports: [HeaderComponent],

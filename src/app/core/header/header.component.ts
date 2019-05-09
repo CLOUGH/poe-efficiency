@@ -4,9 +4,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAppState } from '../store/app/app.state';
 import { Store, select } from '@ngrx/store';
 import { SetSelectedCharacterIndex } from '../store/character/character.actions';
-import { selectCharacterList, selectSelectedCharacterIndex } from '../store/character/character.selectors';
+import { selectCharacterList, selectSelectedCharacterIndex, selectSelectedCharacter } from '../store/character/character.selectors';
 import { GoogleAnalyticsServiceService } from '../services/google-analytics-service.service';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   characters$ = this.store.pipe(select(selectCharacterList));
-  selectedCharacterIndex$ = this.store.pipe(select(selectSelectedCharacterIndex));
+  selectedCharacter$ = this.store.pipe(select(selectSelectedCharacter));
 
   constructor(
     private modalService: NgbModal,
@@ -33,13 +34,9 @@ export class HeaderComponent implements OnInit {
     const modalRef = this.modalService.open(SettingsModalComponent);
   }
 
-  onChangeSelectedCharacter(index: number) {
-    this.googleAnalyticsService.eventEmitter(
-      'Configuration Event',
-      'changed active character',
-      'onChangeCharacter',
-      this.characters$[index].name
-    )
+  changeSelectedCharacter(index: number) {
+    console.log(index);
+    this.googleAnalyticsService.eventEmitter('Configuration Event','changed active character');
     this.store.dispatch(new SetSelectedCharacterIndex(index));
   }
 }

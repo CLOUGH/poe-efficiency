@@ -9,6 +9,8 @@ import { DisplayPropertyNamePipe } from './pipes/display-property-name.pipe';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { MomentModule } from 'ngx-moment';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { environment } from 'src/environments/environment';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     NgbPopoverModule,
     NgbProgressbarModule,
     MomentModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    AdsenseModule.forRoot({
+      adClient: environment.adSenseId,
+    }),
   ]
 })
 export class HomeModule { }

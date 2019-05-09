@@ -7,6 +7,7 @@ import { IAppState } from 'src/app/core/store/app/app.state';
 import { selectSelectedCharacter } from 'src/app/core/store/character/character.selectors';
 import { Router } from '@angular/router';
 import { GoogleAnalyticsServiceService } from 'src/app/core/services/google-analytics-service.service';
+import { ICharacter } from 'src/app/core/models/icharacter';
 
 @Component({
   selector: 'app-item',
@@ -17,7 +18,7 @@ export class ItemComponent implements OnInit {
 
   public itemData: any;
   similarTradedItems: any[];
-  characterLeague: string;
+  selectedCharacter: ICharacter;
 
   @Input() set item(value: any) {
     this.itemData = value;
@@ -31,16 +32,15 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     this.store$.pipe(
-      select(selectSelectedCharacter),
-      switchMap(data => of(data))
+      select(selectSelectedCharacter)
     ).subscribe(character => {
-      this.characterLeague = character.league;
+      this.selectedCharacter = character;
     });
   }
   getItemCurrentValue() {
     this.googleAnalyticsService.eventEmitter('Item Event', 'Get Item Current Value');
 
-    this.apiService.getSimilarItem(this.itemData, this.characterLeague).pipe(
+    this.apiService.getSimilarItem(this.itemData, this.selectedCharacter.league).pipe(
       switchMap(data => of(data))
     ).subscribe((similarTradedItems: any) => {
       // console.log(similarTradedItems);
