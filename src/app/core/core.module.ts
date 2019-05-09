@@ -16,9 +16,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApiService } from './services/api.service';
 import { StaticDataEffect } from './store/static/static-data.effects';
 import { AdsenseModule } from 'ng2-adsense';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SettingsModalComponent],
+  declarations: [HeaderComponent, SettingsModalComponent, FooterComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -41,7 +42,7 @@ import { AdsenseModule } from 'ng2-adsense';
     }) : []
   ],
   providers: [PathOfExileApiService, ApiService],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, FooterComponent],
   entryComponents: [SettingsModalComponent]
 })
 export class CoreModule { }
