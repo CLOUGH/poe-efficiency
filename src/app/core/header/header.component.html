@@ -1,24 +1,3 @@
-<!-- <div class="container">
-  <div class="d-flex justify-content-between bd-highlight mb-3">
-    <div class="p-2 bd-highlight"></div>
-    <div class="p-2 bd-highligh">
-      <h1 class="display-1 text-center">Path Of Efficiency</h1>
-    </div>
-    <div class="p-2 bd-highlight">
-      <div class="text-right">
-        <i class="fa fa-cog" aria-hidden="true" (click)="openSettings()"></i>
-      </div>
-
-      <div class="form-group">
-        <select class="form-control form-control-sm" name="selectedCharacter" id="selectedCharacter" (change)="onChangeSelectedCharacter($event.target.value)">
-          <option *ngFor="let character of characters$|async; let i=index"
-            [selected]="(selectedCharacterIndex$|async)===i" [value]="i" >{{character.name}}</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-</div> -->
 <nav class="navbar navbar-expand-sm navbar-dark">
   <a class="navbar-brand" href="#">Path Of Efficiency</a>
   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
@@ -40,7 +19,7 @@
     <ul class="navbar-nav mt-lg-0">
       <li class="nav-item" ngbDropdown  >        
         <a class="nav-link" ngbDropdownToggle  >
-          <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+          <i class="fa fa-user-circle-o" aria-hidden="true" *ngIf="!(selectedCharacter$|async)"></i>
           <span></span>
           {{(selectedCharacter$|async)?.name}}
         </a>

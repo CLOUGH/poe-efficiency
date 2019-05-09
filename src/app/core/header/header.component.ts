@@ -26,7 +26,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    if (!localStorage.getItem('POESESSID')) {
+      this.openSettings();
+    }
   }
 
   openSettings() {
@@ -35,8 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeSelectedCharacter(index: number) {
-    console.log(index);
-    this.googleAnalyticsService.eventEmitter('Configuration Event','changed active character');
+    this.googleAnalyticsService.eventEmitter('Configuration Event', 'changed active character');
     this.store.dispatch(new SetSelectedCharacterIndex(index));
   }
 }

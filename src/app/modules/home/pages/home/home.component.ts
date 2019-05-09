@@ -36,10 +36,10 @@ export class HomeComponent implements OnInit {
     this.refresh();
   }
 
-  private setItemData(accountName, character) {
+  setItemData(accountName, character) {
   }
 
-  private refresh() {
+  refresh() {
     interval(30000).pipe(startWith(0)).subscribe(() => {
       this.updating = true;
       this.store.pipe(
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public refreshManually() {
+  refreshManually() {
     this.googleAnalyticsService.eventEmitter('Character Items', 'Manually Triggered Refresh');
     this.refresh();
   }
