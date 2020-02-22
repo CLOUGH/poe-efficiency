@@ -19,7 +19,7 @@ export class CurrencyPipe implements PipeTransform {
     return this.store.pipe(
       select(selectFindStaticData(value, 'currency')),
       switchMap((staticData: IStaticDataItem) => {
-        return of(this.sanitizer.bypassSecurityTrustHtml(`<img src="https://www.pathofexile.com/${staticData.image}" height="25"/>`));
+        return of(this.sanitizer.bypassSecurityTrustHtml(`<img src="https://www.pathofexile.com${staticData.image}" height="25"/>`));
       })
     );
   }
